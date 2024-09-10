@@ -37,14 +37,44 @@
                             "field": "name",
                             "help": "A unique name for the account.",
                             "required": true
+                        },{
+                            "type": "text",
+                            "label": "Hive Username",
+                            "field": "hive_username",
+                            "help": "Hive Username",
+                            "required": true,
+                            "encrypted": false
+                        },{
+                            "type": "text",
+                            "label": "Hive Password",
+                            "field": "hive_password",
+                            "help": "Hive Password",
+                            "required": true,
+                            "encrypted": true
                         },
                         {
                             "type": "text",
-                            "label": "API key",
-                            "field": "api_key",
-                            "help": "API key",
+                            "label": "Device Group Key",
+                            "field": "device_group_key",
+                            "help": "Device Group Key",
                             "required": true,
-                            "encrypted": true
+                            "encrypted": false
+                        },
+                        {
+                            "type": "text",
+                            "label": "Device Key",
+                            "field": "device_key",
+                            "help": "Device Key",
+                            "required": true,
+                            "encrypted": false
+                        },
+                        {
+                            "type": "text",
+                            "label": "Device Password",
+                            "field": "device_password",
+                            "help": "Device Password",
+                            "required": true,
+                            "encrypted": false
                         }
                     ],
                     "title": "Accounts"
