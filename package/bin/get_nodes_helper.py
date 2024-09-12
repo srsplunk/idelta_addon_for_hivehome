@@ -5,7 +5,8 @@ import requests
 import import_declare_test
 from solnlib import conf_manager, log
 from splunklib import modularinput as smi
-from pyhiveapi import Hive, SMS_REQUIRED
+from pyhiveapi import Hive
+
 
 
 ADDON_NAME = "idelta_addon_for_hivehome"
@@ -22,7 +23,7 @@ def get_device_credentials(session_key: str, account_name: str):
         realm=f"__REST_CREDENTIAL__#{ADDON_NAME}#configs/conf-idelta_addon_for_hivehome_account",
     )
     account_conf_file = cfm.get_conf("idelta_addon_for_hivehome_account")
-    return account_conf_file.get(account_name).get("hive_username"),account_conf_file.get(account_name).get("hive_password"), account_conf_file.get(account_name).get("device_key"), account_conf_file.get(account_name).get("device_password")
+    return account_conf_file.get(account_name).get("hive_username"),account_conf_file.get(account_name).get("hive_password"), account_conf_file.get(account_name).get("device_group_key"), account_conf_file.get(account_name).get("device_key"),account_conf_file.get(account_name).get("device_password")
 
 def device_auth(logger: logging.Logger, hive_username: str,hive_password: str,device_group_key: str,device_key: str,device_password: str):
     logger.info("Starting Hive Device Authentication")
@@ -85,12 +86,17 @@ def stream_events(inputs: smi.InputDefinition, event_writer: smi.EventWriter):
             log.modular_input_start(logger, normalized_input_name)
             #get the data required for authentication:
             hive_username,hive_password,device_group_key,device_key,device_password = get_device_credentials(session_key, input_item.get("account"))
+            logger.debug("hive username: "+hive_username)
+            logger.debug("hive password: "+hive_password)
+            logger.debug("device group key: "+device_group_key)
+            logger.debug("device key: "+device_key)
+            logger.debug("device password: "+device_password)
             #perform authentication and get the session tokens
-            session_tokens = device_auth(hive_username,hive_password,device_group_key,device_key,device_password)
+            session_tokens = device_auth(logger,hive_username,hive_password,device_group_key,device_key,device_password)
             #call the API endpoint to get the nodes data
             data = get_data_from_api(logger, session_tokens["tokenData"]["token"]) 
             sourcetype = "hive:nodes"
-            for line in data:
+            for line in data["nodes"]:
                 event_writer.write_event(
                     smi.Event(
                         data=json.dumps(line, ensure_ascii=False, default=str),

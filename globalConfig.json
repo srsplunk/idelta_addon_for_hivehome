@@ -37,14 +37,16 @@
                             "field": "name",
                             "help": "A unique name for the account.",
                             "required": true
-                        },{
+                        },
+                        {
                             "type": "text",
                             "label": "Hive Username",
                             "field": "hive_username",
                             "help": "Hive Username",
                             "required": true,
                             "encrypted": false
-                        },{
+                        },
+                        {
                             "type": "text",
                             "label": "Hive Password",
                             "field": "hive_password",
@@ -207,12 +209,23 @@
     "meta": {
         "name": "idelta_addon_for_hivehome",
         "restRoot": "idelta_addon_for_hivehome",
-        "version": "0.0.1",
+        "version": "0.0.9R68c3893",
         "displayName": "iDelta Add-on For Hive Home",
         "schemaVersion": "0.0.8",
+        "os-dependentLibraries": [
+            {
+                "name": "lxml",
+                "version": "5.3.0",
+                "platform": "manylinux_2_28_x86_64",
+                "python_version": "39",
+                "os": "linux",
+                "target": "3rdparty/linux"
+            }
+        ],
         "supportedThemes": [
             "light",
             "dark"
-        ]
+        ],
+        "_uccVersion": "5.49.0"
     }
 }
