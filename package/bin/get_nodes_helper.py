@@ -52,7 +52,7 @@ def get_data_from_api(logger: logging.Logger, session_token: str):
         'X-Omnia-Access-Token': session_token
         }
     response = requests.request("GET", url, headers=headers, data=payload)
-    logger.debug("Hive API nodes endpoint response code: "+str(response.status_code)
+    logger.debug("Hive API nodes endpoint response code: "+str(response.status_code))
     response_json = json.loads(response.text)
     return response_json
 
@@ -88,11 +88,14 @@ def stream_events(inputs: smi.InputDefinition, event_writer: smi.EventWriter):
             log.modular_input_start(logger, normalized_input_name)
             #get the data required for authentication:
             hive_username,hive_password,device_group_key,device_key,device_password = get_device_credentials(session_key, input_item.get("account"))
-            logger.debug("hive username: "+hive_username)
-            logger.debug("hive password: "+hive_password)
-            logger.debug("device group key: "+device_group_key)
-            logger.debug("device key: "+device_key)
-            logger.debug("device password: "+device_password)
+            
+            #Credential Logging Commented Out:
+            #logger.debug("hive username: "+hive_username)
+            #logger.debug("hive password: "+hive_password)
+            #logger.debug("device group key: "+device_group_key)
+            #logger.debug("device key: "+device_key)
+            #logger.debug("device password: "+device_password)
+            
             #perform authentication and get the session tokens
             session_tokens = device_auth(logger,hive_username,hive_password,device_group_key,device_key,device_password)
             #call the API endpoint to get the nodes data
