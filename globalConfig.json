@@ -58,7 +58,7 @@
                             "type": "text",
                             "label": "Device Group Key",
                             "field": "device_group_key",
-                            "help": "Device Group Key",
+                            "help": "Device Group Key must be generated, see https://github.com/srsplunk/hive-get-device-credentials",
                             "required": true,
                             "encrypted": false
                         },
@@ -66,7 +66,7 @@
                             "type": "text",
                             "label": "Device Key",
                             "field": "device_key",
-                            "help": "Device Key",
+                            "help": "Device Key must be generated, see https://github.com/srsplunk/hive-get-device-credentials",
                             "required": true,
                             "encrypted": false
                         },
@@ -74,7 +74,7 @@
                             "type": "text",
                             "label": "Device Password",
                             "field": "device_password",
-                            "help": "Device Password",
+                            "help": "Device Password must be generated, see https://github.com/srsplunk/hive-get-device-credentials",
                             "required": true,
                             "encrypted": false
                         }
@@ -209,7 +209,7 @@
     "meta": {
         "name": "idelta_addon_for_hivehome",
         "restRoot": "idelta_addon_for_hivehome",
-        "version": "0.0.9R68c3893",
+        "version": "0.1.3Ra16f21c",
         "displayName": "iDelta Add-on For Hive Home",
         "schemaVersion": "0.0.8",
         "os-dependentLibraries": [

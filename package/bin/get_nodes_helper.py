@@ -6,6 +6,7 @@ import import_declare_test
 from solnlib import conf_manager, log
 from splunklib import modularinput as smi
 from pyhiveapi import Hive
+import lxml
 
 
 
@@ -51,6 +52,7 @@ def get_data_from_api(logger: logging.Logger, session_token: str):
         'X-Omnia-Access-Token': session_token
         }
     response = requests.request("GET", url, headers=headers, data=payload)
+    logger.debug("Hive API nodes endpoint response code: "+str(response.status_code)
     response_json = json.loads(response.text)
     return response_json
 
